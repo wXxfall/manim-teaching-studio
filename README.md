@@ -15,15 +15,7 @@
 
 ## 🎬 演示视频
 
-![演示动画](docs/assets/preview.gif)
-
-**▶ [观看完整演示视频(56 秒 / 4.7 MB)](docs/assets/demo.mp4)** —— 完整流程:策略师九项确认单 → 科学审查 → 逐场景写码 → 低清渲染 → **浏览器点选/拖拽元素改动画** → 回炉应用重渲染。
-
-> 💡 想换成 GitHub 内嵌播放器(带进度条与声音)?三步即可:① 在 GitHub 任意评论框或 README 编辑框里把 `docs/assets/demo.mp4` 拖进去上传;② 得到形如 `https://github.com/user-attachments/assets/<uuid>` 的链接;③ 把下面注释里的 `VIDEO_URL` 替换为该链接并取消注释。
-
-<!--
-<video src="VIDEO_URL" controls width="100%"></video>
--->
+https://github.com/user-attachments/assets/47c1aeb0-c2cc-44b4-b090-0efa68cef4ce
 
 ---
 
