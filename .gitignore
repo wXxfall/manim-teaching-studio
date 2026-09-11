@@ -23,5 +23,3 @@ projects/*/backup/
 projects/*/docs/review/preview/
 projects/*/docs/review/rework/
 projects/*/.live_preview.lock
-
-.env
