@@ -1,4 +1,4 @@
-﻿# 🎬 Manim Teaching Studio
+# 🎬 Manim Teaching Studio
 
 > **`manim-teaching-studio`** · 面向大学生的物理教学 Manim 动画视频制作流水线
 
@@ -15,11 +15,15 @@
 
 ## 🎬 演示视频
 
-<video src="https://raw.githubusercontent.com/wXxfall/manim-teaching-studio/main/docs/assets/demo.mp4" controls width="100%"></video>
+![演示动画](docs/assets/preview.gif)
 
-> 若上方播放器没有出现(部分镜像站/客户端不渲染内嵌视频),请[**点此下载观看**(4.7 MB)](docs/assets/demo.mp4)。
+**▶ [观看完整演示视频(56 秒 / 4.7 MB)](docs/assets/demo.mp4)** —— 完整流程:策略师九项确认单 → 科学审查 → 逐场景写码 → 低清渲染 → **浏览器点选/拖拽元素改动画** → 回炉应用重渲染。
 
-视频内容:从「策略师确认单」到「浏览器点选元素改动画」的完整流程演示。
+> 💡 想换成 GitHub 内嵌播放器(带进度条与声音)?三步即可:① 在 GitHub 任意评论框或 README 编辑框里把 `docs/assets/demo.mp4` 拖进去上传;② 得到形如 `https://github.com/user-attachments/assets/<uuid>` 的链接;③ 把下面注释里的 `VIDEO_URL` 替换为该链接并取消注释。
+
+<!--
+<video src="VIDEO_URL" controls width="100%"></video>
+-->
 
 ---
 
