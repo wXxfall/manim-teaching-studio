@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manim Teaching Studio · 画面预览与回炉</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header id="topbar">
+  <div class="brand">🎬 Manim Teaching Studio · 画面预览与回炉</div>
+  <div id="project-name"></div>
+  <div class="topbar-right">
+    <span id="reload-banner" class="hidden">
+      探针数据已更新 <button id="reload-btn">重新加载</button>
+    </span>
+    <button id="theme-btn" class="ghost" title="切换白天/黑夜模式">🌙</button>
+    <button id="exit-btn" class="ghost">退出预览</button>
+  </div>
+</header>
+
+<div id="main">
+  <!-- 左:场景与节点 -->
+  <aside id="scene-panel">
+    <div class="panel-title">场景</div>
+    <div id="scene-list"></div>
+    <div class="panel-title node-title">节点(元素出现后 1s)</div>
+    <div id="node-list"></div>
+  </aside>
+
+  <!-- 中:画布 -->
+  <section id="canvas-panel">
+    <div id="canvas-toolbar">
+      <span id="current-loc"></span>
+      <span class="spacer"></span>
+      <button id="play-all-btn" class="topbtn" title="连续播放所有场景的低清渲染视频">▶ 总预览</button>
+      <span class="zoom-group">
+        缩放
+        <button data-zoom="0.5">50%</button>
+        <button data-zoom="1" class="active">100%</button>
+        <button data-zoom="1.5">150%</button>
+      </span>
+    </div>
+    <div id="canvas-scroll">
+      <div id="canvas-frame">
+        <img id="node-image" alt="节点画面">
+        <div id="overlay-layer"></div>
+      </div>
+    </div>
+    <div id="canvas-hint">点击画面中的元素可选中(Ctrl+点击多选,Esc 取消)。元素出现的 1 秒后即为当前节点。</div>
+  </section>
+
+  <!-- 右:选中元素与控件 -->
+  <aside id="edit-panel">
+    <div class="panel-title">选中元素 <span id="sel-count"></span></div>
+    <div id="sel-list"></div>
+    <div id="controls" class="hidden">
+      <div class="ctrl-group">
+        <div class="ctrl-label">位置(Manim 单位)</div>
+        <div class="pos-grid">
+          <button data-op="shift" data-dx="0" data-dy="0.1" data-step="0.1" title="上移">↑</button>
+          <button data-op="shift" data-dx="0" data-dy="-0.1" data-step="0.1" title="下移">↓</button>
+          <button data-op="shift" data-dx="-0.1" data-dy="0" data-step="0.1" title="左移">←</button>
+          <button data-op="shift" data-dx="0.1" data-dy="0" data-step="0.1" title="右移">→</button>
+        </div>
+        <div class="step-row">步长:
+          <select id="shift-step">
+            <option value="0.05">0.05(精调)</option>
+            <option value="0.1" selected>0.1(微调)</option>
+            <option value="0.25">0.25</option>
+            <option value="0.5">0.5(大调)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">排版对齐(PPT 式)</div>
+        <div class="btn-row">
+          <button data-align="canvas-h">画布水平居中</button>
+          <button data-align="canvas-v">画布垂直居中</button>
+        </div>
+        <div class="btn-row">
+          <button data-align="left" title="选中元素左边缘对齐">左对齐</button>
+          <button data-align="hcenter" title="选中元素水平中心对齐">水平居中</button>
+          <button data-align="right" title="选中元素右边缘对齐">右对齐</button>
+        </div>
+        <div class="btn-row">
+          <button data-align="top" title="选中元素顶边对齐">顶端对齐</button>
+          <button data-align="vcenter" title="选中元素垂直中心对齐">垂直居中</button>
+          <button data-align="bottom" title="选中元素底边对齐">底端对齐</button>
+        </div>
+        <div class="btn-row">
+          <button data-align="dist-h" title="选中元素水平等间距分布(≥3)">横向分布</button>
+          <button data-align="dist-v" title="选中元素垂直等间距分布(≥3)">纵向分布</button>
+        </div>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">颜色</div>
+        <div class="swatch-row">
+          <button class="swatch" style="background:#ffffff" data-op="set_color" data-value="#ffffff" title="白"></button>
+          <button class="swatch" style="background:#58b9ff" data-op="set_color" data-value="#58b9ff" title="蓝"></button>
+          <button class="swatch" style="background:#8be9fd" data-op="set_color" data-value="#8be9fd" title="浅蓝"></button>
+          <button class="swatch" style="background:#ffd866" data-op="set_color" data-value="#ffd866" title="黄"></button>
+          <button class="swatch" style="background:#ff6188" data-op="set_color" data-value="#ff6188" title="红"></button>
+          <button class="swatch" style="background:#a6e22e" data-op="set_color" data-value="#a6e22e" title="绿"></button>
+          <input type="color" id="color-pick" value="#ffffff" title="自定义">
+        </div>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">深浅(透明度)<span id="opacity-val"></span></div>
+        <input type="range" id="opacity-range" min="0.05" max="1" step="0.05" value="1">
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">大小</div>
+        <div class="btn-row">
+          <button data-op="scale" data-value="0.9">缩小 −</button>
+          <button data-op="scale" data-value="1.1">放大 +</button>
+        </div>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">入场动画时长<span id="runtime-val"></span></div>
+        <div class="btn-row">
+          <button data-op="set_run_time" data-value="-0.2">缩短 −0.2s</button>
+          <button data-op="set_run_time" data-value="0.2">加长 +0.2s</button>
+        </div>
+      </div>
+
+      <div class="ctrl-group" id="font-size-group">
+        <div class="ctrl-label">字号(仅文字)</div>
+        <div class="btn-row">
+          <button data-op="set_font_size" data-value="-2">字号 −</button>
+          <button data-op="set_font_size" data-value="2">字号 +</button>
+        </div>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">层级(前后遮挡)</div>
+        <div class="btn-row">
+          <button data-op="set_z_index" data-value="-1">下移一层</button>
+          <button data-op="set_z_index" data-value="1">上移一层</button>
+        </div>
+      </div>
+
+      <div class="ctrl-group code-ref" id="code-ref"></div>
+    </div>
+    <div id="no-sel-hint">点击画布中的元素开始调整</div>
+  </aside>
+</div>
+
+<!-- 底部:回炉重造 -->
+<footer id="rework-bar">
+  <div class="rework-col" id="rework-ops-col">
+    <div class="rework-label">当前场景的修改<span id="ops-count"></span></div>
+    <div id="op-chips"></div>
+  </div>
+  <div class="rework-col" id="rework-text-col">
+    <div class="rework-label">回炉重造 · <span id="rework-context"></span></div>
+    <textarea id="rework-text" rows="2"
+      placeholder="对这个场景的整体要求,例如「标题和公式不要重叠」…"></textarea>
+  </div>
+  <div class="rework-btns">
+    <button id="submit-btn" class="primary">提交落盘</button>
+    <button id="submitted-btn" class="ghost" title="查看各场景已落盘的提交队列">已提交(<span id="submitted-count">0</span>)</button>
+    <button id="clear-btn" class="ghost" title="清空当前场景的未提交操作与已落盘条目">清空</button>
+  </div>
+  <div id="rework-status"></div>
+</footer>
+
+<!-- 已提交清单(可视化提交队列) -->
+<div id="submit-panel" class="hidden">
+  <div class="submit-panel-head">
+    <span>📋 已落盘的修改(回对话说「应用修改」将全部应用)</span>
+    <button id="submit-panel-close" class="ghost">✕</button>
+  </div>
+  <div id="submit-list"></div>
+  <div class="submit-panel-foot">同一场景重复提交 = 覆盖该场景条目;不同场景并列成队列。</div>
+</div>
+
+<!-- 总预览:连续播放全部场景视频 -->
+<div id="video-modal" class="hidden">
+  <div class="video-box">
+    <div class="video-head">
+      <span id="video-title"></span>
+      <div>
+        <button id="video-prev">◀ 上一场</button>
+        <button id="video-next">下一场 ▶</button>
+        <button id="video-close">✕ 关闭</button>
+      </div>
+    </div>
+    <video id="player" controls playsinline></video>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

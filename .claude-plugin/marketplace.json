@@ -1,0 +1,17 @@
+{
+  "name": "manim-teaching-studio",
+  "owner": {
+    "name": "meteoron_ist"
+  },
+  "metadata": {
+    "description": "面向大学物理教学的 Manim 动画视频制作流水线:策略师九项确认、科学审查、逐场景手写代码、元素级探针与浏览器交互式画面预览(点选元素直接改、回炉重造),1080p60 成片交付。",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "manim-teaching-studio",
+      "source": "./skills/manim-teaching-studio",
+      "description": "物理教学 Manim 视频制作 skill(SKILL.md 为入口)"
+    }
+  ]
+}

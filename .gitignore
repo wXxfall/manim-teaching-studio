@@ -1,0 +1,27 @@
+# ===== 密钥(绝不入库)=====
+.env
+
+# ===== Python =====
+__pycache__/
+*.pyc
+
+# ===== manim 渲染产物 =====
+media/
+*.mp4
+*.npy
+*.partial_movie_files/
+
+# ===== 渲染日志与审查帧(生成物)=====
+render_log/
+projects/*/docs/review/frames/
+
+# ===== 用户工作区产物 =====
+projects/*/output/
+projects/*/backup/
+
+# ===== 画面预览与回炉产物(生成物) =====
+projects/*/docs/review/preview/
+projects/*/docs/review/rework/
+projects/*/.live_preview.lock
+
+.env
