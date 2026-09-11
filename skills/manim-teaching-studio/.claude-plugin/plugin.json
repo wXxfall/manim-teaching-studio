@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "manim-teaching-studio",
+  "version": "1.0.0",
+  "description": "面向大学物理教学的 Manim 动画视频制作流水线:九项确认单 → 五维科学审查 → 逐场景手写 Manim 代码 → 元素级探针与浏览器交互式画面预览(点选/拖拽元素直接改、回炉重造队列)。",
+  "author": {
+    "name": "meteoron_ist"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/wXxfall/manim-teaching-studio",
+  "repository": "https://github.com/wXxfall/manim-teaching-studio",
+  "keywords": [
+    "manim",
+    "physics",
+    "education",
+    "animation",
+    "video",
+    "teaching"
+  ],
+  "skills": [
+    "./"
+  ]
+}
