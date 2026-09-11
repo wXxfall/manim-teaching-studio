@@ -302,5 +302,15 @@ python <仓库>/skills/manim-teaching-studio/preview/server.py <工程根目录�
 
 ---
 
+## ☕ 赞赏支持
+
+如果这工具帮到了你,也欢迎赏几个子请作者喝杯咖啡 ☕
+
+<div align="center">
+  <img src="docs/assets/canshangma.png" alt="赞赏码" width="200">
+</div>
+
+---
+
 **作者**:meteoron_ist · **许可证**:MIT · 欢迎 Star / Issue / PR
 
