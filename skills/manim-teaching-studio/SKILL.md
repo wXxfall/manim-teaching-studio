@@ -11,6 +11,19 @@ description: >
   "Manim" 或 "skill" 二字。边界:本 skill 负责制作流程、物理内容正确性与科学/画面双重
   质量门;3b1b 视觉语言与 Manim 技法细节(公式编排、配色美学、构图)由 manim-3b1b-style
   skill 承担,二者互补不重复。
+  English: A production pipeline (harness/skill) that turns a physics topic into a 3-minute
+  1080p60 Manim teaching video — nine-item spec confirmation, five-dimension scientific
+  review, per-scene hand-written Manim code, machine + interactive visual review, and
+  ffmpeg delivery. Ships an element-level frame probe (lossless keyframe PNGs captured 1s
+  after each element appears, with element bounding boxes and code-line mapping), a browser
+  preview editor (click/drag elements to adjust position, color, opacity, scale, animation
+  run-time and z-index; PPT-style alignment; a rework queue the agent consumes), and a
+  one-click launcher GUI. Use when the user asks to create physics teaching animations or
+  videos, visualize a physics concept, formula or experiment with Manim, build university
+  physics / quantum mechanics / electromagnetism / optics course animations, make a
+  3-minute explainer or science-popular clip — even if they never say "Manim" or "skill".
+  Bonus: the preview toolchain works on ANY Manim project (`scene_probe.py file <scene.py>`
+  + `preview/server.py <dir>`).
 ---
 
 # Manim 教学工作室(manim-teaching-studio)

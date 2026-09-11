@@ -1,13 +1,25 @@
-# 🎬 Manim Teaching Studio
+﻿# 🎬 Manim Teaching Studio
 
 > **`manim-teaching-studio`** · 面向大学生的物理教学 Manim 动画视频制作流水线
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![Manim CE 0.19.1](https://img.shields.io/badge/ManimCE-0.19.1-525893?style=flat-square)](https://www.manim.community/)
 [![1080p 60fps](https://img.shields.io/badge/输出-1080p60-FF6B6B?style=flat-square)](https://docs.manim.community/)
-[![License MIT](https://img.shields.io/badge/License-MIT-00B4D8?style=flat-square)](https://choosealicense.com/licenses/mit/)
+[![License MIT](https://img.shields.io/badge/License-MIT-00B4D8?style=flat-square)](LICENSE)
+[![skills.sh](https://skills.sh/b/wXxfall/manim-teaching-studio)](https://skills.sh/wXxfall/manim-teaching-studio)
+[![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-插件市场-8B5CF6?style=flat-square)](https://code.claude.com/docs/en/discover-plugins)
 
 把物理主题变成 **默认 3 分钟以内(可调)**、**科学正确**(模拟大学物理教授五维审查)、**画面干净**(视觉 API 机器预筛 + 浏览器交互式画面审查)的 1080p60 教学动画。
+
+---
+
+## 🎬 演示视频
+
+<video src="https://raw.githubusercontent.com/wXxfall/manim-teaching-studio/main/docs/assets/demo.mp4" controls width="100%"></video>
+
+> 若上方播放器没有出现(部分镜像站/客户端不渲染内嵌视频),请[**点此下载观看**(4.7 MB)](docs/assets/demo.mp4)。
+
+视频内容:从「策略师确认单」到「浏览器点选元素改动画」的完整流程演示。
 
 ---
 
@@ -136,9 +148,28 @@ projects/doppler_effect_20260815/
 | ffmpeg | ✅ | 抽帧/拼接/时长解析 | PATH 或 `FFMPEG_DIR` 环境变量 |
 | Flask | 预览功能 | 画面预览服务器 | `pip install flask` |
 | PySide6 | 启动器 | 液态玻璃 GUI(缺失自动降级 tkinter) | `pip install PySide6` |
-| 火山方舟视觉 API(豆包) | 推荐 | 画面机器预筛 | 见 §2.3 |
+| 火山方舟视觉 API(豆包) | 推荐 | 画面机器预筛 | 见 §2.4 |
 
-### 2.1 安装 skill(Windows junction)
+### 2.1 安装(三种方式,任选其一)
+
+**① Claude Code 插件市场(推荐)**
+
+```
+/plugin marketplace add wXxfall/manim-teaching-studio
+/plugin install manim-teaching-studio@manim-teaching-studio
+```
+
+**② 通用 Agent Skills(Claude Code / Cursor / Codex 等跨工具)**
+
+```bash
+npx skills add wXxfall/manim-teaching-studio      # 全局安装,自动识别 skills/ 目录
+```
+
+**③ 手动挂载(离线 / 想改源码)**
+
+把 `skills/manim-teaching-studio` 目录链接到你的用户级 skills 目录,详见 §2.2。
+
+### 2.2 手动挂载(Windows junction)
 
 把 skill 链接到用户级 skills 目录,任意会话全局可用且不占 C 盘空间(`<仓库路径>`、`<用户名>` 换成你自己的):
 
@@ -152,13 +183,13 @@ cmd //c 'mklink /J manim-teaching-studio "<仓库路径>\skills\manim-teaching-s
 - macOS/Linux:`ln -s "<仓库路径>/skills/manim-teaching-studio" ~/.claude/skills/manim-teaching-studio`。
 - 之后在任意会话中说"帮我做一个物理教学动画"即可触发。
 
-### 2.2 一键安装 GUI 依赖(可选)
+### 2.3 一键安装 GUI 依赖(可选)
 
 ```bash
 pip install flask PySide6
 ```
 
-### 2.3 API Key 配置(画面机器预筛的视觉模型)
+### 2.4 API Key 配置(画面机器预筛的视觉模型)
 
 画面审查使用**火山方舟(豆包)视觉 API**检查渲染帧。
 
@@ -267,7 +298,7 @@ python <仓库>/skills/manim-teaching-studio/preview/server.py <工程根目录�
 
 ## 💡 五、常见问题与注意事项
 
-- **画面审查的 API 依赖**:机器预筛需要豆包 key(§2.3);不配置则跳过机器预筛,仍可用浏览器交互式预览。
+- **画面审查的 API 依赖**:机器预筛需要豆包 key(§2.4);不配置则跳过机器预筛,仍可用浏览器交互式预览。
 - **端口冲突**:预览默认 5051(避开 ppt-master 的 5050),可用 `--port` 换端口;启动器会自动复用已运行的服务。
 - **外部编辑器慎防回退**:AI 应用修改后,若您的 IDE 同时打开了场景文件并做了覆盖保存,可能回退 AI 的修改——建议 AI 工作时让编辑器只读或先关闭相关文件。
 - **纪律红线**:工具脚本只做确定性工作(检查/渲染/抽帧/探针),**场景代码一律由 AI 主代理手写/修改**;`.env` 中的 key 永不入代码、永不提交。
